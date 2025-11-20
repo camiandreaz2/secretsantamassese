@@ -1,9 +1,11 @@
 import streamlit as st
-import streamlit.components.v1 as components # Rinominiamo per chiarezza
+import streamlit.components.v1 as components
+import base64
 import random
 import smtplib
 from email.mime.text import MIMEText
 
+file_audio_path = "audio/jingle_bells.mp3" 
 st.markdown('''
 <meta name="viewport" content="width=1200">
 ''', unsafe_allow_html=True)
@@ -79,10 +81,26 @@ st.markdown(f"""
     unsafe_allow_html=True
 )
 
+def autoplay_audio(file_path: str):
+    try:
+        with open(file_path, "rb") as f:
+            data = f.read()
+            b64 = base64.b64encode(data).decode()
+            md = f"""
+                <audio autoplay="true" loop="true">
+                <source src="data:audio/mp3;base64,{b64}" type="audio/mp3">
+                </audio>
+                """
+            components.html(md, height=0)
+    except FileNotFoundError:
+        pass
 
 # --- Blocco di Autenticazione  ---
 if "authenticated" not in st.session_state:
     st.session_state.authenticated = False
+
+if st.session_state.authenticated:
+    autoplay_audio(file_audio_path)
 
 if not st.session_state.authenticated:
     st.title("🔒 Accesso all'app Secret Santa")
@@ -98,6 +116,7 @@ if not st.session_state.authenticated:
 
 
 st.write("<h1 style='text-align:center;'>🎅 Secret Santa – Natale Magico 🎄</h1>", unsafe_allow_html=True)
+#st.audio("audio/jingle_bells.mp3", format="audio/mp3")
 
 # --- Funzioni Python ---
 def genera_abbinamenti(partecipanti):
