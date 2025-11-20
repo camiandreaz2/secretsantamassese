@@ -14,7 +14,6 @@ st.markdown('''
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 ''', unsafe_allow_html=True)
 
-# SECONDA COSA: Aggiungiamo le Media Query al CSS
 st.markdown(f"""
     <style>
         /* Stili di base per tutti gli schermi (desktop) */
@@ -66,7 +65,7 @@ st.markdown(f"""
             #babbo-corner {{
                 width: 120px;  /* Più piccolo per mobile */
                 height: 120px;
-                top: 10px;     /* Meno distanza dal bordo */
+                top: 50px;     /* Meno distanza dal bordo */
                 left: 10px;
             }}
 
@@ -80,7 +79,6 @@ st.markdown(f"""
 
     </style>
 
-    <!-- Questi rimangono uguali -->
     <div id="neve-bg">
         <iframe class="lottie-iframe" src="{lottie_neve_url}"></iframe>
     </div>
