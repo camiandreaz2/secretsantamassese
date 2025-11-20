@@ -4,6 +4,9 @@ import random
 import smtplib
 from email.mime.text import MIMEText
 
+st.markdown('''
+<meta name="viewport" content="width=1200">
+''', unsafe_allow_html=True)
 
 lottie_babbo_url = "https://lottie.host/embed/9e8b9ea1-673b-4d26-bcd5-1cfbe148737e/WdRibmGOU1.lottie"
 lottie_neve_url = "https://lottie.host/embed/ca25cd91-521d-4bba-8b22-d9cb9e5b7826/ornD9D5peJ.lottie"
