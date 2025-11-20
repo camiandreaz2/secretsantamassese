@@ -6,21 +6,18 @@ import smtplib
 from email.mime.text import MIMEText
 
 file_audio_path = "audio/jingle_bells.mp3" 
-st.markdown('''
-<meta name="viewport" content="width=1200">
-''', unsafe_allow_html=True)
-
 lottie_babbo_url = "https://lottie.host/embed/9e8b9ea1-673b-4d26-bcd5-1cfbe148737e/WdRibmGOU1.lottie"
 lottie_neve_url = "https://lottie.host/embed/ca25cd91-521d-4bba-8b22-d9cb9e5b7826/ornD9D5peJ.lottie"
 lottie_pacco_url = "https://lottie.host/embed/310e18b7-4fe0-45fc-836e-32942c7ec687/bUXLpA2FLl.lottie"
 
+st.markdown('''
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+''', unsafe_allow_html=True)
+
+# SECONDA COSA: Aggiungiamo le Media Query al CSS
 st.markdown(f"""
     <style>
-        /*
-        z-index 1
-        in modo che si posizioni SOPRA la nostra neve.
-        "position: relative" è necessario affinché z-index funzioni
-        */
+        /* Stili di base per tutti gli schermi (desktop) */
         .main .block-container {{
             position: relative;
             z-index: 1;
@@ -32,42 +29,58 @@ st.markdown(f"""
             height: 100%;
         }}
 
-        /* Contenitore per lo sfondo di neve */
         #neve-bg {{
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            /*z-index: 0 lo mette sopra lo sfondo base ma sotto il contenuto */
             z-index: 0;
             pointer-events: none;
             opacity: 0.7;
         }}
 
-        /* Contenitore per Babbo Natale (angolo in alto a sinistra) */
         #babbo-corner {{
             position: fixed;
             top: 70px;
             left: 30px;
-            width: 250px;
+            width: 250px; /* Grande per desktop */
             height: 250px;
-            z-index: 999; /* Rimane sopra a tutto */
+            z-index: 999;
             pointer-events: none;
         }}
 
-        /* Contenitore per il pacco (angolo in basso a destra) */
         #pacco-corner {{
             position: fixed;
             bottom: 20px;
             right: 20px;
-            width: 250px;
+            width: 250px; /* Grande per desktop */
             height: 250px;
-            z-index: 999; /* Rimane sopra a tutto */
+            z-index: 999;
             pointer-events: none;
         }}
+
+        /* --- MEDIA QUERY PER SMARTPHONE --- */
+        /* Queste regole verranno applicate solo se la larghezza dello schermo è 768px o inferiore */
+        @media (max-width: 768px) {{
+            #babbo-corner {{
+                width: 120px;  /* Più piccolo per mobile */
+                height: 120px;
+                top: 10px;     /* Meno distanza dal bordo */
+                left: 10px;
+            }}
+
+            #pacco-corner {{
+                width: 120px;  /* Più piccolo per mobile */
+                height: 120px;
+                bottom: 10px;  /* Meno distanza dal bordo */
+                right: 10px;
+            }}
+        }}
+
     </style>
 
+    <!-- Questi rimangono uguali -->
     <div id="neve-bg">
         <iframe class="lottie-iframe" src="{lottie_neve_url}"></iframe>
     </div>
